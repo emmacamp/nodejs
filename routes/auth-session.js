@@ -52,4 +52,27 @@ authSessionRouter.get("/profile", (req, res) => {
     return res.send(user);
 });
 
+
+// Logout
+authSessionRouter.post("/logout", (req, res) => {
+    const { cookies } = req;
+
+    if (!cookies.sessionId) return res.sendStatus(401);
+
+    const sessionIndex = sessions.findIndex(
+        (session) => session.sessionId === cookies.sessionId
+    );
+
+    if (sessionIndex === -1) return res.sendStatus(401);
+
+    sessions.splice(sessionIndex, 1);
+
+    res.clearCookie("sessionId");
+
+    return res.send();
+});
+
+
+console.log({ sessions});
+
 export default authSessionRouter;
