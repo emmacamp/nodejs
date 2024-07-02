@@ -11,7 +11,7 @@ authTokenRouter.post("/login", validateLoginDTO, async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const { guid } = authByEmailPwd(email, password);
+        const { guid } = authByEmailPwd({email, password});
 
         //GENERAR TOKEN Y DEVOLVER TOKEN
         const jwtConstructor = new SignJWT({ guid });

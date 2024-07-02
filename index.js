@@ -1,4 +1,4 @@
-// import cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 
@@ -12,7 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT || 4000;
 const expressApp = express();
 
-// expressApp.use(cookieParser());
+expressApp.use(cookieParser());
 expressApp.use(express.json());
 expressApp.use(express.text());
 

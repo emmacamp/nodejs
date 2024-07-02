@@ -10,13 +10,17 @@ const authSessionRouter = Router();
 authSessionRouter.post("/login", (req, res) => {
     const { email, password } = req.body;
 
+    console.log({ email, password });
+
     if (!email || !password) return res.sendStatus(400);
 
     try {
-        const { guid } = authByEmailPwd(email, password);
+        const { guid } = authByEmailPwd({email, password});
 
         const sessionId = nanoid();
         sessions.push({ sessionId, guid });
+
+        console.log({ sessionId, guid });
 
         res.cookie("sessionId", sessionId, {
             httpOnly: true,

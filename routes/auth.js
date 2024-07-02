@@ -31,7 +31,7 @@ authRouter.post("/autorized", (req, res) => {
     if (!email || !password) return res.send(BAD_REQUEST);
 
     try {
-        const user = authByEmailPwd(email, password);
+        const user = authByEmailPwd({email, password});
 
         if (user.role !== "admin") return res.send(FORBIDDEN);
 
